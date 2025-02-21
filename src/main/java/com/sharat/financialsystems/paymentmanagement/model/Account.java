@@ -3,19 +3,34 @@ package com.sharat.financialsystems.paymentmanagement.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
+@Table(name = "account")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String accountNumber;
+    @Column(unique = true)
+    private Long accountNumber;
+
     private Double balance;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    @JsonBackReference
-    private Customer customer;
+    @JoinColumn(name = "branch_id")
+    private Branch branch;
+
+    @ManyToOne
+    @JoinColumn(name = "account_type_id")
+    private AccountType accountType;
+
+    @ManyToOne
+    @JoinColumn(name = "account_level_id")
+    private AccountLevel accountLevel;
+
+    @OneToMany(mappedBy = "account")
+    private List<Transaction> transactions;
 
     public Long getId() {
         return id;
@@ -25,11 +40,11 @@ public class Account {
         this.id = id;
     }
 
-    public String getAccountNumber() {
+    public Long getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
+    public void setAccountNumber(Long accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -41,11 +56,35 @@ public class Account {
         this.balance = balance;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Branch getBranch() {
+        return branch;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    public AccountLevel getAccountLevel() {
+        return accountLevel;
+    }
+
+    public void setAccountLevel(AccountLevel accountLevel) {
+        this.accountLevel = accountLevel;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }
