@@ -1,30 +1,42 @@
 package com.sharat.financialsystems.paymentmanagement.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @Entity
+@XmlRootElement(name = "customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "firstName")
     private String firstName;
+    @Column(name = "lastName")
     private String lastName;
+    @Column(name = "title")
     private String title;
+    @Column(name = "middleInitial")
     private String middleInitial;
+    @Column(name = "suffix")
     private String suffix;
+    @Column(name = "age")
     private int age;
+    @Column(name = "ssn")
     private int ssn;
+    @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @Column(unique = true)
+    @Column(name="emailAddress",unique = true)
     private String emailAddress;
-    @Column(unique = true)
+    @Column(name="username",unique = true)
     private String username;
 
     @OneToMany(mappedBy = "customer")
+    @JsonBackReference
     private List<CustomerAccount> customerAccounts;
 
     public Long getId() {

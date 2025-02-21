@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-customer-table" author="sharat">
+        <createTable tableName="CUSTOMER">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="firstName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lastName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middleInitial" type="varchar(1)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="suffix" type="varchar(10)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="age" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ssn" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phoneNumber" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="emailAddress" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="load-customer-data" author="sharat">
+        <loadData separator=";" tableName="CUSTOMER" file="customer.csv" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>

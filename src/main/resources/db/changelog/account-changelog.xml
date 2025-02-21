@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-account-table" author="sharat">
+        <createTable tableName="ACCOUNT">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="accountNumber" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="balance" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="branch_id" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="account_type_id" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="account_level_id" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-account-foreign-keys" author="sharat">
+        <addForeignKeyConstraint baseTableName="ACCOUNT" baseColumnNames="branch_id"
+                                 referencedTableName="BRANCH" referencedColumnNames="id"
+                                 constraintName="FK_account_branch"/>
+        <addForeignKeyConstraint baseTableName="ACCOUNT" baseColumnNames="account_type_id"
+                                 referencedTableName="ACCOUNT_TYPE" referencedColumnNames="id"
+                                 constraintName="FK_account_account_type"/>
+        <addForeignKeyConstraint baseTableName="ACCOUNT" baseColumnNames="account_level_id"
+                                 referencedTableName="ACCOUNT_LEVEL" referencedColumnNames="id"
+                                 constraintName="FK_account_account_level"/>
+    </changeSet>
+    <changeSet id="load-account-data" author="sharat">
+        <loadData separator=";" tableName="ACCOUNT" file="account.csv" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>

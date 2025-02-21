@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-card-product-table" author="sharat">
+        <createTable tableName="CARD_PRODUCT">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="pin" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nameOnCard" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cardNumber" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        <column name="securityCode" type="int">
+            <constraints nullable="false"/>
+        </column>
+        <column name="enabled" type="boolean">
+            <constraints nullable="false"/>
+        </column>
+        <column name="dateIssued" type="date">
+            <constraints nullable="false"/>
+        </column>
+        <column name="dateExpire" type="date">
+            <constraints nullable="false"/>
+        </column>
+        <column name="dateActivated" type="date">
+            <constraints nullable="true"/>
+        </column>
+        <column name="dateDeactivated" type="date">
+            <constraints nullable="true"/>
+        </column>
+        <column name="card_type_id" type="bigint">
+            <constraints nullable="false"/>
+        </column>
+        <column name="customer_account_id" type="bigint">
+            <constraints nullable="false"/>
+        </column>
+    </createTable>
+    <addForeignKeyConstraint baseTableName="CARD_PRODUCT"
+                             baseColumnNames="card_type_id"
+                             constraintName="fk_card_product_card_type"
+                             referencedTableName="CARD_TYPE"
+                             referencedColumnNames="id"/>
+    <addForeignKeyConstraint baseTableName="CARD_PRODUCT"
+                             baseColumnNames="customer_account_id"
+                             constraintName="fk_card_product_customer_account"
+                             referencedTableName="CUSTOMER_ACCOUNT"
+                             referencedColumnNames="id"/>
+</changeSet>
+
+<changeSet id="load-card-product-data" author="sharat">
+<loadData separator=";" tableName="CARD_PRODUCT" file="card-product.csv" relativeToChangelogFile="true"/>
+</changeSet>
+        </databaseChangeLog>

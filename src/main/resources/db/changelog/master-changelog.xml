@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <include file="db/changelog/customer-changelog.xml"/>
+    <include file="db/changelog/branch-changelog.xml"/>
+    <include file="db/changelog/account-type-changelog.xml"/>
+    <include file="db/changelog/account-level-changelog.xml"/>
+    <include file="db/changelog/account-changelog.xml"/>
+    <include file="db/changelog/card-type-changelog.xml"/>
+    <include file="db/changelog/customer-account-changelog.xml"/>
+    <include file="db/changelog/transaction-type-changelog.xml"/>
+    <include file="db/changelog/transaction-changelog.xml"/>
+    <include file="db/changelog/card-product-changelog.xml"/>
+
+</databaseChangeLog>

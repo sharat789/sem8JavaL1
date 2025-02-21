@@ -1,0 +1,6 @@
+id;name;overdraftAllowed;dailyWithdrawalLimit;monthlyMaxTransfersAllowed
+1;Basic;false;500;10
+2;Silver;true;1000;20
+3;Gold;true;2000;30
+4;Platinum;true;5000;50
+5;Diamond;true;10000;100

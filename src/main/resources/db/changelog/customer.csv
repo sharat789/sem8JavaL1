@@ -1,0 +1,6 @@
+id;firstName;lastName;suffix;title;middleInitial;age;ssn;phoneNumber;emailAddress;username
+1;NewCustomer;Customer;jr;Mr;J;33;1234;12345;customer@gmail.com;user234
+2;Jane;Doe;;Ms;A;28;5678;67890;jane.doe@example.com;jdoe
+3;John;Smith;sr;Mr;B;45;9101;11223;john.smith@example.com;jsmith
+4;Alice;Johnson;;Mrs;C;37;3141;44556;alice.johnson@example.com;ajohnson
+5;Bob;Brown;;Mr;D;50;1617;77889;bob.brown@example.com;bbrown

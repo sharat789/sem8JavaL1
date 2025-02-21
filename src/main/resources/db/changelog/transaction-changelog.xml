@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-transaction-table" author="sharat">
+        <createTable tableName="TRANSACTION">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="amount" type="decimal(19,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dateCreated" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_id" type="bigint">
+            </column>
+            <column name="transaction_type_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="TRANSACTION"
+                                 baseColumnNames="account_id"
+                                 constraintName="fk_transaction_account"
+                                 referencedTableName="ACCOUNT"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="TRANSACTION"
+                                 baseColumnNames="transaction_type_id"
+                                 constraintName="fk_transaction_transaction_type"
+                                 referencedTableName="TRANSACTION_TYPE"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="load-transaction-data" author="sharat">
+        <loadData separator=";" tableName="TRANSACTION" file="transaction.csv" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>

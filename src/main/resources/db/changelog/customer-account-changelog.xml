@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-customer-account-table" author="sharat">
+        <createTable tableName="CUSTOMER_ACCOUNT">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="enabled" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_id" type="bigint">
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="CUSTOMER_ACCOUNT"
+                                 baseColumnNames="customer_id"
+                                 constraintName="fk_customer_account_customer"
+                                 referencedTableName="CUSTOMER"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="CUSTOMER_ACCOUNT"
+                                 baseColumnNames="account_id"
+                                 constraintName="fk_customer_account_account"
+                                 referencedTableName="ACCOUNT"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="load-customer-account-data" author="sharat">
+        <loadData separator=";" tableName="CUSTOMER_ACCOUNT" file="customer-account.csv" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>

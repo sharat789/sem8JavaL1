@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-account-level-table" author="sharat">
+        <createTable tableName="ACCOUNT_LEVEL">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="overdraftAllowed" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+        <column name="monthlyMaxTransfersAllowed" type="int">
+            <constraints nullable="false"/>
+        </column>
+            <column name="dailyWithdrawalLimit" type="int">
+                <constraints nullable="false"/>
+            </column>
+    </createTable>
+</changeSet>
+
+<changeSet id="load-account-level-data" author="sharat">
+<loadData separator=";" tableName="ACCOUNT_LEVEL" file="account-level.csv" relativeToChangelogFile="true"/>
+</changeSet>
+        </databaseChangeLog>
