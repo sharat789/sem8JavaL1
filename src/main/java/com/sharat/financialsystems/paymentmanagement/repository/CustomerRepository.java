@@ -14,4 +14,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     // Alternatively, using a custom query with the @Query annotation:
     @Query("select c from Customer c where c.firstName = :firstName")
     Customer findCustomerByFirstName(@Param("firstName") String firstName);
+
+    @Query("select distinct c from Customer c " +
+            "left join fetch ca.account a " +
+            "left join fetch a.transactions")
+    List<Customer> findAllCustomersWithAccountsAndTransactions();
 }

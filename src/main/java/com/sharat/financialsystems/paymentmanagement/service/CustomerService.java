@@ -27,4 +27,8 @@ public class CustomerService {
     public Customer getCustomerByFirstName(String firstName) {
         return customerRepository.findCustomerByFirstName(firstName);
     }
+
+    public List<Customer> getAllCustomersWithAccountsAndTransactions() {
+        return customerRepository.findAllCustomersWithAccountsAndTransactions();
+    }
 }

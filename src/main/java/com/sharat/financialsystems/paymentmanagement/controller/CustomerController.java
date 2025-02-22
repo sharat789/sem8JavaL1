@@ -28,4 +28,9 @@ public class CustomerController {
     public Customer getCustomerByFirstName(@RequestParam("firstName") String firstName) {
         return customerService.getCustomerByFirstName(firstName);
     }
+
+    @GetMapping("/withDetails")
+    public List<Customer> getAllCustomersWithAccountsAndTransactions() {
+        return customerService.getAllCustomersWithAccountsAndTransactions();
+    }
 }
