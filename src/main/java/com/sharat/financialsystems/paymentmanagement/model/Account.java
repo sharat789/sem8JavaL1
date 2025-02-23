@@ -1,6 +1,7 @@
 package com.sharat.financialsystems.paymentmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class Account {
     private AccountLevel accountLevel;
 
     @OneToMany(mappedBy = "account")
+    @JsonManagedReference
     private List<Transaction> transactions;
 
     public Long getId() {

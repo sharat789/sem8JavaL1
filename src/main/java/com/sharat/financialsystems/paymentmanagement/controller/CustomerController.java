@@ -1,6 +1,8 @@
 package com.sharat.financialsystems.paymentmanagement.controller;
 
 import com.sharat.financialsystems.paymentmanagement.model.Customer;
+import com.sharat.financialsystems.paymentmanagement.model.CustomerAccount;
+import com.sharat.financialsystems.paymentmanagement.model.Transaction;
 import com.sharat.financialsystems.paymentmanagement.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +31,13 @@ public class CustomerController {
         return customerService.getCustomerByFirstName(firstName);
     }
 
-    @GetMapping("/withDetails")
-    public List<Customer> getAllCustomersWithAccountsAndTransactions() {
-        return customerService.getAllCustomersWithAccountsAndTransactions();
+    @GetMapping("/{customerId}/accounts")
+    public List<CustomerAccount> getAccountsByCustomerId(@PathVariable Long customerId) {
+        return customerService.getAccountsByCustomerId(customerId);
+    }
+
+    @GetMapping("/accounts/{accountId}/transactions")
+    public List<Transaction> getTransactionsByAccountId(@PathVariable Long accountId) {
+        return customerService.getTransactionsByAccountId(accountId);
     }
 }
