@@ -1,13 +1,19 @@
 package com.sharat.financialsystems.paymentmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
+
 import java.util.List;
 
 @Entity
 @XmlRootElement(name = "customer")
+@XmlType(propOrder = {"id", "firstName", "lastName", "title", "middleInitial", "suffix", "age", "ssn", "phoneNumber", "emailAddress", "username", "customerAccounts"})
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,30 +21,39 @@ public class Customer {
 
     @Column(name = "firstName")
     private String firstName;
+
     @Column(name = "lastName")
     private String lastName;
+
     @Column(name = "title")
     private String title;
+
     @Column(name = "middleInitial")
     private String middleInitial;
+
     @Column(name = "suffix")
     private String suffix;
+
     @Column(name = "age")
     private int age;
+
     @Column(name = "ssn")
     private int ssn;
+
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @Column(name="emailAddress",unique = true)
     private String emailAddress;
-    @Column(name="username",unique = true)
+
+    @Column(name = "username", unique = true)
     private String username;
 
     @OneToMany(mappedBy = "customer")
     @JsonBackReference
     private List<CustomerAccount> customerAccounts;
 
+    @XmlElement
+    @JsonProperty
     public Long getId() {
         return id;
     }
@@ -47,6 +62,8 @@ public class Customer {
         this.id = id;
     }
 
+    @XmlElement
+    @JsonProperty
     public String getFirstName() {
         return firstName;
     }
@@ -55,6 +72,8 @@ public class Customer {
         this.firstName = firstName;
     }
 
+    @XmlElement
+    @JsonProperty
     public String getLastName() {
         return lastName;
     }
@@ -63,6 +82,8 @@ public class Customer {
         this.lastName = lastName;
     }
 
+    @XmlElement
+    @JsonProperty
     public String getTitle() {
         return title;
     }
@@ -71,6 +92,8 @@ public class Customer {
         this.title = title;
     }
 
+    @XmlElement
+    @JsonProperty
     public String getMiddleInitial() {
         return middleInitial;
     }
@@ -79,6 +102,8 @@ public class Customer {
         this.middleInitial = middleInitial;
     }
 
+    @XmlElement
+    @JsonProperty
     public String getSuffix() {
         return suffix;
     }
@@ -87,6 +112,8 @@ public class Customer {
         this.suffix = suffix;
     }
 
+    @XmlElement
+    @JsonProperty
     public int getAge() {
         return age;
     }
@@ -95,6 +122,8 @@ public class Customer {
         this.age = age;
     }
 
+    @XmlElement
+    @JsonProperty
     public int getSsn() {
         return ssn;
     }
@@ -103,6 +132,8 @@ public class Customer {
         this.ssn = ssn;
     }
 
+    @XmlElement
+    @JsonProperty
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -111,6 +142,8 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+    @XmlElement
+    @JsonProperty
     public String getEmailAddress() {
         return emailAddress;
     }
@@ -119,6 +152,8 @@ public class Customer {
         this.emailAddress = emailAddress;
     }
 
+    @XmlElement
+    @JsonProperty
     public String getUsername() {
         return username;
     }
@@ -127,6 +162,8 @@ public class Customer {
         this.username = username;
     }
 
+    @XmlElement(name = "account")
+    @JsonProperty
     public List<CustomerAccount> getCustomerAccounts() {
         return customerAccounts;
     }

@@ -3,11 +3,13 @@ package com.sharat.financialsystems.paymentmanagement.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.util.List;
 
 @Entity
 @Table(name = "account")
+@XmlRootElement(name = "account")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

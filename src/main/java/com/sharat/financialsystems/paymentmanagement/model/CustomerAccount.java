@@ -1,9 +1,17 @@
 package com.sharat.financialsystems.paymentmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+/**
+ * Entity representing the many-many relation between customer and acocount in the payment management system.
+ */
 
 @Entity
 @Table(name = "customer_account")
+@XmlRootElement(name = "customer_account")
 public class CustomerAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +27,8 @@ public class CustomerAccount {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    @XmlElement
+    @JsonProperty
     public Long getId() {
         return id;
     }
@@ -27,6 +37,8 @@ public class CustomerAccount {
         this.id = id;
     }
 
+    @XmlElement
+    @JsonProperty
     public Boolean getEnabled() {
         return enabled;
     }
@@ -35,6 +47,8 @@ public class CustomerAccount {
         this.enabled = enabled;
     }
 
+    @XmlElement
+    @JsonProperty
     public Customer getCustomer() {
         return customer;
     }
@@ -43,6 +57,8 @@ public class CustomerAccount {
         this.customer = customer;
     }
 
+    @XmlElement
+    @JsonProperty
     public Account getAccount() {
         return account;
     }
